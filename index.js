@@ -1,14 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-
+const dbConfig = require("./src/config/dbConfig")
+const mainRouter = require("./src/routes")
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/", mainRouter);
 
-app.listen(5000, () => {
+app.listen(4500, () => {
     console.log(`
                  ################################################
-                     @  Server listening on port: ${5000} @
+                     @  Server listening on port: ${4500} @
                  ################################################
              `);
 
