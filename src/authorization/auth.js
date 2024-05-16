@@ -18,7 +18,6 @@ const verfiyToken = async (req, res) => {
     }
     return jwt.verify(accessToken, process.env.ACCESS_SECRET_KEY , (accessErr) => {
         if(accessErr) {
-            console.log("generating new token")
             const newToken = jwt.sign(decoded, process.env.ACCESS_SECRET_KEY);
 
             res.setHeader("Authorization" , `Bearer ${newToken}`);
@@ -36,7 +35,6 @@ const verfiyToken = async (req, res) => {
 
 async function mainAuthorized(req,res,next) {
   try {
-    console.log("main")
     const decoded = await verfiyToken(req,res);
     if(decoded){
       req.decoded = decoded; 
