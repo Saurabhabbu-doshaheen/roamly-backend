@@ -1,9 +1,9 @@
-const services= require("../service/login");
-const login = async (req, res) => {
+const services= require("../service/register");
+const register = async (req, res) => {
     try {
-        const result = await services.login(req);
+        const result = await services.register(req);
         const logBody ={
-            success:'Logged In Succesfully',
+            success:'Registered Succesfully',
             data:result
         }
         res.send(logBody);
@@ -12,5 +12,5 @@ const login = async (req, res) => {
     }
 };
 module.exports = {
-    login
+    register
 };
