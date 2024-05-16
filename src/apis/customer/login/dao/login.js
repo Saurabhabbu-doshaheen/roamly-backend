@@ -9,5 +9,5 @@ async function findUser(email_id, password) {
     }
 }
 module.exports = {
-    findUser,findAll
+    findUser
 };
