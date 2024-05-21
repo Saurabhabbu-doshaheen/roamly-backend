@@ -10,10 +10,10 @@ const generalSearchService = async (req) => {
 
         const response = await axios.get(url);
 
-        const datas = response.data;
+        const places = response.data;
         formatReqArray = [];
-        for (const data of datas) {
-            ({ lat, lon, importance, addresstype, boundingbox, name, display_name, address } = data);
+        for (const place of places) {
+            ({ lat, lon, importance, addresstype, boundingbox, name, display_name, address } = place);
             const formatReqJson = {
                 cityName: name,
                 display_name,

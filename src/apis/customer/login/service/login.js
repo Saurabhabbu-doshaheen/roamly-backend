@@ -13,8 +13,8 @@ async function login(req) {
             name : userDetails["first_name"],
             emailId : userDetails["email_id"],
          }
-         const tokens = signToken(data)
-        return tokens;
+         const tokens = await signToken(data)
+        return {tokens,data};
     } catch (error) {
         throw new Error(error);
         }
