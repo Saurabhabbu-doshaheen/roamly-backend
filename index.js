@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", mainRouter);
+app.use("/api", mainRouter);
 
 app.listen(4500, () => {
     console.log(`
