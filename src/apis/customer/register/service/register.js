@@ -13,7 +13,7 @@ async function register(req) {
          const otp = generateOTP(); 
          const now = new Date();
          const otpExpiration = new Date(now.getTime() + 2 * 60000);
-        await sendEmail(req.body.email_id, 'Your OTP', `Your OTP is: ${otp}`);
+        await sendEmail(req.body.email_id, 'Your OTP', otp);
         otpStore[req.body.email_id] = {
             otp,
             otpExpiration,
