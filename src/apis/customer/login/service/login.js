@@ -1,10 +1,11 @@
 const { signToken } = require("../../../../authorization/auth");
 const {findUser} = require("../dao/login");
 const {loginValidation} = require("../validation/login");
+const customer = require("../../../../models/Customer");
 async function login(req) {
     try {
          loginValidation(req.body); 
-         const userDetails = await findUser(req.body.emailId,req.body.password);
+         const userDetails = await findUser(customer,req.body.emailId,req.body.password);
          if (!userDetails) {
              throw new Error('User doesnt exists');
          }

@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
+const {generateHtmlContent} = require('./emailContent');
 
-async function sendEmail(to, subject, text) {
+async function sendEmail(to, subject,text) {
     try {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -9,11 +10,12 @@ async function sendEmail(to, subject, text) {
                 pass: 'zuac mnff vnkg wbtd'
             }
         });
+        const htmlContent = generateHtmlContent(text);
         let mailOptions = {
             from: 'mamatakuwarrathod@gmail.com',
             to: to,
             subject: subject, 
-            text: htmlContent 
+            html: htmlContent
         };
         let info = await transporter.sendMail(mailOptions);
     } catch (error) {
@@ -23,28 +25,3 @@ async function sendEmail(to, subject, text) {
 module.exports = {
     sendEmail
 };
-const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Xecsrify OTP</title>
-    <style>
-        /* CSS styles go here */
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="logo">
-            <img src="xecsrify-logo.png" alt="Xecsrify Logo">
-        </div>
-        <div class="content">
-            <p>Dear Customer,</p>
-            <p>Your One Time Passcode for completing your transaction is: <strong>${text}</strong></p>
-            <p>Please use this Passcode to complete your transaction. Do not share this Passcode with anyone.</p>
-            <p>Thank you,<br>Xecsrify Team</p>
-            <div class="disclaimer">Disclaimer: This email and any files transmitted with it are confidential and intended solely for the use of the individual or entity to whom they are addressed.</div>
-        </div>
-    </div>
-</body>
-</html>
-`;
