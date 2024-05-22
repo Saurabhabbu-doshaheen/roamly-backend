@@ -1,8 +1,6 @@
-const Customer = require('../../../../models/Customer'); 
-
-async function addUser(firstName, lastName, email, password, phoneNo) {
+async function addUser(model,firstName, lastName, email, password, phoneNo) {
     try {
-        const newUser = new Customer({
+        const newUser = new model({
             first_name: firstName,
             last_name: lastName,
             email_id: email,
@@ -17,9 +15,9 @@ async function addUser(firstName, lastName, email, password, phoneNo) {
     }
 }
 
-async function findUser(email) {
+async function findUser(model,email) {
     try {
-        const user = await Customer.findOne({ email_id: email });
+        const user = await model.findOne({ email_id: email });
         return user;
     } catch (error) {
         throw error;
