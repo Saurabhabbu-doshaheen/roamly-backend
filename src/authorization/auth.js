@@ -62,7 +62,7 @@ const signToken = async (data) => {
 
     return token;
   } catch (error) {
-    throw { status: 401, message: "Error generating token" };
+    throw { message: "Error generating token",status: 401,data : {} };
   }
 };
 

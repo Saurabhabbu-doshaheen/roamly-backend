@@ -3,12 +3,13 @@ const register = async (req, res) => {
     try {
         const result = await services.register(req);
         const logBody ={
-            success:'Registered Succesfully',
+            message:'OTP Sent Successfully!',
+            status: 200,
             data:result
         }
-        res.send(logBody);
+        res.status(logBody.status).send(logBody);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(error.status).send(error);
     }
 };
 module.exports = {

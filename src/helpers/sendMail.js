@@ -1,25 +1,28 @@
 const nodemailer = require('nodemailer');
-const {generateHtmlContent} = require('./emailContent');
+const { generateHtmlContent } = require('./emailContent');
+require('dotenv').config();
 
-async function sendEmail(to, subject,text) {
+async function sendEmail(to, subject, text) {
     try {
         let transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: "smtp.fatcow.com",
+            port: 465 ,
+            secure: true, // upgrade later with STARTTLS
             auth: {
-                user: 'mamatakuwarrathod@gmail.com', 
-                pass: 'zuac mnff vnkg wbtd'
+                user: process.env.EMAIL_ID,
+                pass: process.env.EMAIL_PWD
             }
         });
         const htmlContent = generateHtmlContent(text);
         let mailOptions = {
-            from: 'mamatakuwarrathod@gmail.com',
+            from: process.env.EMAIL_ID,
             to: to,
-            subject: subject, 
+            subject: subject,
             html: htmlContent
         };
         let info = await transporter.sendMail(mailOptions);
     } catch (error) {
-        throw new Error('Error sending email');
+        throw { message:"Error Sending Email!", status : 400, data : {error}}
     }
 }
 module.exports = {
