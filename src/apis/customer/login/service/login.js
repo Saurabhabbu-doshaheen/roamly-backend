@@ -7,7 +7,7 @@ async function login(req) {
          loginValidation(req.body); 
          const userDetails = await findUser(customer,req.body.emailId,req.body.password);
          if (!userDetails) {
-             throw new Error('User doesnt exists');
+            throw { message: 'User doesnt exists', status: 400, data: {} };
          }
          const data = {
             id : userDetails["_id"],
@@ -17,8 +17,8 @@ async function login(req) {
          const tokens = await signToken(data)
         return {tokens,data};
     } catch (error) {
-        throw new Error(error);
-        }
+        throw error;
+    }
 }
 module.exports={
    login

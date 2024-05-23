@@ -3,13 +3,16 @@ const services = require("../service/validateOtp");
 const validateOtp = async (req, res) => {
     try {
         const result = await services.validateOtp(req.body);
-        const logBody ={
-            success:'Registered Succesfully',
-            data:result
+
+        const logBody = {
+            message: 'Valid OTP! Registered Succesfully',
+            status: 200,
+            data: {}
         }
-        res.send(logBody);
+
+        res.status(logBody.status).send(logBody);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(error.status).send(error);
     }
 };
 module.exports = {

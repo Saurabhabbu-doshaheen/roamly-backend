@@ -3,14 +3,16 @@ const login = async (req, res) => {
     try {
         const result = await services.login(req);
         const logBody ={
-            success:'Logged In Succesfully',
+            message:'Logged In Succesfully',
+            status : 200,
             data:result
-        }
-        res.send(logBody);
+        };
+        res.status(logBody.status).send(logBody);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(error.status).send(error);
     }
 };
+
 module.exports = {
     login
 };

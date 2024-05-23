@@ -10,7 +10,7 @@ function userValidation(body) {
     });
     const { error } = schema.validate(body);
     if (error) {
-        throw new Error(error.details[0].message);
+        throw { message: error.details[0].message, status: 400, data: {} };
     }
 }
 module.exports ={

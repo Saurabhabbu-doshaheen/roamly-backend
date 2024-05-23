@@ -7,9 +7,7 @@ const generalSearchService = async (req) => {
 
 
         const url = `https://nominatim.openstreetmap.org/search?q=${searchPlace}&format=json&addressdetails=1`
-
         const response = await axios.get(url);
-
         const places = response.data;
         formatReqArray = [];
         for (const place of places) {
